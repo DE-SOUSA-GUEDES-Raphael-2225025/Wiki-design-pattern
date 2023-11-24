@@ -183,6 +183,11 @@ La **façade** est une conception permettant de simplifier l'interaction avec un
 
 - **Surcoût Initial :** La création peut entraîner un surcoût initial, mais cela est souvent compensé par une facilité de maintenance à long terme.
 
+  # Sources
+  (https://refactoring.guru/fr/design-patterns/facade)
+  (https://fr.wikipedia.org/wiki/Singleton_(patron_de_conception))
+  (https://refactoring.guru/fr/design-patterns/singleton)   
+
 
 
 
