@@ -11,11 +11,11 @@ L'intention principale du Singleton est de garantir qu'il n'existe qu'une seule 
 
 - **Accès global :** Le Singleton fournit un point d'accès global à cette unique instance. Cela simplifie l'accès à cette instance depuis n'importe quelle partie du code, évitant ainsi la nécessité de passer explicitement l'instance entre différentes parties du programme. Cependant, il protège son instance et l’empêche d’être modifiée.
 
-- **Initialisation paresseuse :** Certains Singleton sont conçus pour une initialisation paresseuse, où une seule instance est créée uniquement lorsqu'elle est réellement nécessaire. Cela évite une initialisation coûteuse au démarrage du programme et améliore les performances.
+- **Initialisation paresseuse :** Certains Singleton sont conçus pour une initialisation paresseuse, où une seule instance est créée uniquement lorsqu'elle est réellement nécessaire. Cela évite une initialisation au démarrage du programme. L'initialisation est ainsi faite lorsque du premier appel de la methode ```getInstance()```.
 
 ## Solution
 1. Limiter l'accès à l'opérateur `new` en déclarant le constructeur par défaut en tant que privé, empêchant ainsi d'autres objets d'invoquer directement la création d'instances de la classe Singleton.
-2. Introduire une méthode statique de création agissant comme un constructeur, qui en interne utilise le constructeur privé pour instancier un objet et le stocke dans une variable statique. Tous les appels ultérieurs à cette méthode renvoient l'objet mis en mémoire cache.
+2. Introduire une méthode statique de création agissant comme un constructeur, qui en interne utilise le constructeur privé pour instancier un objet et le stocke dans une variable statique. Tous les appels ultérieurs à cette méthode renvoient l'objet mis en mémoire cache. Une variable static ```Instance``` est donc initialisée et permet d'accéder à la classe avec un getter ```getInstance()```.
 3. Si votre code a accès à la classe d'un singleton, vous pouvez appeler ses méthodes statiques. Le même objet est toujours renvoyé à chaque appel de cette méthode.
 
 ## Analogie
@@ -97,11 +97,11 @@ Pour des applications qui nécessitent une seule instance pour gérer les connex
 
 ### Inconvénients du Singleton
 
-1. **Ne respecte pas le principe de responsabilité unique :** Ce patron résout deux problèmes à la fois.
-2. **Testabilité :** La présence d'un Singleton peut rendre le code moins testable, car il peut être difficile de remplacer l'instance unique par une version mock ou de test.
-3. **Violation du principe d'ouverture/fermeture :** Peut rendre difficile l'extension de certaines classes, car l'accès à l'instance unique est souvent codé en dur dans le code existant.
-4. **Problèmes de multithreading :** Dans des environnements multithreadés, des problèmes de concurrence peuvent survenir si des précautions appropriées ne sont pas prises lors de l'accès et de la création de l'instance unique.
+1. **Testabilité :** La présence d'un Singleton peut rendre le code moins testable, car il peut être difficile de remplacer l'instance unique par une version mock ou de test.
+2. **Violation du principe d'ouverture/fermeture :** Peut rendre difficile l'extension de certaines classes, car l'accès à l'instance unique est souvent codé en dur dans le code existant.
+3. **Problèmes de multithreading :** Dans des environnements multithreadés, des problèmes de concurrence peuvent survenir si des précautions appropriées ne sont pas prises lors de l'accès et de la création de l'instance unique.
 
+</br> </br> </br> </br>
 # Façade
 
 ## Intention
