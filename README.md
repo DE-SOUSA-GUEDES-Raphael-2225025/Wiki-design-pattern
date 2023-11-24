@@ -102,4 +102,88 @@ Pour des applications qui nécessitent une seule instance pour gérer les connex
 3. **Violation du principe d'ouverture/fermeture :** Peut rendre difficile l'extension de certaines classes, car l'accès à l'instance unique est souvent codé en dur dans le code existant.
 4. **Problèmes de multithreading :** Dans des environnements multithreadés, des problèmes de concurrence peuvent survenir si des précautions appropriées ne sont pas prises lors de l'accès et de la création de l'instance unique.
 
+# Façade
+
+## Intention
+
+La Façade agit comme une façade (d'où le nom) qui expose une interface simplifiée aux clients tout en gérant les interactions complexes avec les composants du sous-système. Cela facilite l'interaction des clients avec le système, car ils n'ont plus besoin de connaître les détails internes et les subtilités du sous-système.
+
+## Résolution de Problèmes
+
+### Complexité du Système
+Lorsque votre système est composé de nombreux sous-systèmes interdépendants et que l'interaction directe avec ces sous-systèmes est complexe, la Façade offre une interface simplifiée pour l'utilisation du système global.
+
+### Dépendances Client
+Si les clients sont fortement couplés avec les détails d'implémentation du système, tout changement interne peut avoir un impact important sur les clients. La Façade réduit cette dépendance en fournissant une interface stable.
+
+### Séparation des Responsabilités
+La Façade permet de déplacer la complexité de la gestion des interactions entre les composants du sous-système à l'intérieur de la façade, aidant ainsi à maintenir une structure de code plus claire et à séparer les responsabilités.
+
+## Solution
+
+Une façade se révèle très pratique si votre application n’a besoin que d’une partie des fonctionnalités d’une librairie sophistiquée parmi les nombreuses qu’elle propose. Par exemple, une application qui envoie des petites vidéos de chats comiques sur des réseaux sociaux peut potentiellement utiliser une librairie de conversion vidéo professionnelle. Mais la seule chose dont vous ayez réellement besoin, c’est d’une classe dotée d’une méthode `encoder(fichier, format)`. Après avoir créé cette classe et intégré la librairie de conversion vidéo, votre façade est opérationnelle.
+
+## Analogie
+
+Imaginons que vous entrez dans un restaurant sophistiqué pour commander un repas. À première vue, vous ne voyez que le serveur, qui agit comme une sorte de façade pour l'ensemble du processus culinaire qui se déroule en cuisine.
+
+- **La Cuisine (Sous-système complexe) :** La cuisine représente le sous-système complexe avec ses chefs, équipements, et processus de cuisson. C'est là que toute la magie de la préparation des repas se produit, mais en tant que client, vous n'avez pas besoin de connaître les détails de chaque étape.
+
+- **Le Serveur (Facade) :** Le serveur agit comme une façade. Il prend votre commande, la transmet à la cuisine, gère les détails complexes tels que la coordination des plats, et finalement vous présente votre repas. Vous interagissez principalement avec le serveur, qui simplifie votre expérience de restauration.
+
+- **Votre Interaction (Client) :** En tant que client, vous n'avez pas à vous soucier des détails complexes de la cuisine. Vous communiquez simplement avec le serveur en utilisant une interface simple (menu), et le serveur se charge de faire le lien avec le sous-système complexe en cuisine.
+
+Dans cette analogie, la Façade (le serveur) simplifie votre interaction avec un système complexe (la cuisine) en fournissant une interface unifiée et conviviale. Vous n'avez pas besoin de connaître les détails internes de la préparation des plats, car le serveur gère cela pour vous. De même, dans le design pattern de Façade en programmation, la façade simplifie l'interaction avec un système complexe en fournissant une interface simplifiée aux clients.
+
+## Structure
+![Image montrant la structure de facade](https://refactoring.guru/images/patterns/diagrams/facade/structure.png?id=258401362234ac77a2aaf1cde62339e7)
+
+1. **Accès Pratique aux Différentes Parties des Fonctionnalités du Sous-système :**
+   - Façade offre un accès pratique aux différentes parties des fonctionnalités du sous-système. Elle sait où orienter les besoins de ses clients et comment utiliser les différentes pièces mobiles.
+
+2. **Classe Façade Supplémentaire :**
+   - Une classe Façade supplémentaire peut être créée afin de prévenir toute complexité excessive dans une façade existante. Cette nouvelle façade additionnelle peut inclure des fonctionnalités supplémentaires sans surcharger la première, et elle peut être utilisée à la fois par le client directement et par d'autres façades.
+
+3. **Sous-système Complexe :**
+   - Le sous-système complexe est constitué d'une multitude d'objets divers. Afin de leur conférer une véritable utilité, il est nécessaire de se plonger dans les détails de l'implémentation du sous-système, tels que l'initialisation des objets dans un ordre précis et la fourniture des données dans un format approprié.
+   - Les classes du sous-système ne sont pas conscientes de l'existence de la façade. Elles fonctionnent et interagissent directement à l'intérieur de leur propre système.
+
+4. **Utilisation de la Façade par le Client :**
+   - Le client utilise la façade pour interagir avec le sous-système au lieu d'appeler directement les objets du sous-système.
+  
+## Exemple de Code Facade
+
+# Utilisation de Facade
+
+La **façade** est une conception permettant de simplifier l'interaction avec un sous-système complexe en offrant une interface plus conviviale pour le code client. Elle agit comme un intermédiaire en redirigeant les appels du code client vers les objets du sous-système. Voici comment créer et mettre en œuvre une façade :
+
+1. **Vérification de la possibilité d'offrir une interface plus simple que celle du sous-système.**
+
+2. **Création et implémentation de cette interface comme une nouvelle façade, redirigeant les appels du code client vers les objets du sous-système.**
+
+3. **Gestion de l'initialisation du sous-système et de son cycle de vie, si le code client ne le fait pas déjà.**
+
+4. **Assurer que toute communication du code client avec le sous-système passe par la façade pour protéger contre les effets de bord en cas de modifications du sous-système.**
+
+5. **En cas d'expansion excessive, envisager de déplacer des comportements vers une nouvelle façade spécialisée pour maintenir la clarté de la structure.**
+
+## Avantages de la Façade :
+
+- **Simplification de l'Interface :** Fournit une interface unifiée et conviviale.
+  
+- **Réduction de la Complexité :** Masque les détails internes, facilitant l'utilisation du système.
+
+- **Dépendance Réduite :** Les clients n'ont besoin que de connaître l'interface de la façade.
+
+- **Facilité de Maintenance :** Les modifications internes au sous-système n'affectent pas les clients.
+
+## Inconvénients de la Façade :
+
+- **Complexité de la Façade :** Risque de devenir complexe si surchargée.
+
+- **Surcoût Initial :** La création peut entraîner un surcoût initial, mais cela est souvent compensé par une facilité de maintenance à long terme.
+
+
+
+
 
