@@ -24,3 +24,32 @@ Imaginons un roi dans un royaume qui veut garantir qu'il n'y ait qu'un seul tré
 ## Structure
 La classe Singleton déclare une méthode `getInstance` statique et renvoie la même instance de sa propre classe. Le code client ne peut pas référencer les constructeurs singleton. Seule la méthode `getInstance` doit autoriser l'accès aux objets Singleton.
 ![Image montrant la structure de singleton](https://refactoring.guru/images/patterns/diagrams/singleton/structure-fr.png?id=c61f45af3dee82ffdbe7a737fa33efa3)
+
+## Exemple de Code Singleton en Java
+
+Dans cet exemple, la classe de la connexion à la base de données est le Singleton. Cette classe n'a pas de constructeur public, vous ne pouvez y accéder que grâce à la méthode `getInstance`. Cette méthode met en cache le premier objet créé puis retourne ce même objet lors des appels ultérieurs.
+
+```java
+public class DatabaseConnection {
+    private static DatabaseConnection instance;
+
+    // Constructeur privé pour empêcher l'instanciation directe depuis l'extérieur
+    private DatabaseConnection() {
+        // Initialisation de la connexion à la base de données
+    }
+
+    // Méthode statique de création d'instance
+    public static DatabaseConnection getInstance() {
+        if (instance == null) {
+            instance = new DatabaseConnection();
+        }
+        return instance;
+    }
+
+    // Autres méthodes de gestion de la connexion à la base de données
+    // ...
+
+    public void executeQuery(String query) {
+        // Implémentation de l'exécution de la requête
+    }
+}
