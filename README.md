@@ -75,7 +75,7 @@ class Application is
         bar.query("SELECT ...")
         // La variable `bar` contiendra le même objet que la
         // variable `foo`.
-
+```
 ## Utilisation de Singleton
 
 ### Gestion des configurations
