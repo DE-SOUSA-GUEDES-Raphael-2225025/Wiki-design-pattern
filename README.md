@@ -153,7 +153,7 @@ Dans cette analogie, la Façade (le serveur) simplifie votre interaction avec un
   
 ## Exemple de Code Facade
 
-# Utilisation de Facade
+## Utilisation de Facade
 
 La **façade** est une conception permettant de simplifier l'interaction avec un sous-système complexe en offrant une interface plus conviviale pour le code client. Elle agit comme un intermédiaire en redirigeant les appels du code client vers les objets du sous-système. Voici comment créer et mettre en œuvre une façade :
 
