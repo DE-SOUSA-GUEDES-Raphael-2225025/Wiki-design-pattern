@@ -27,54 +27,46 @@ La classe Singleton déclare une méthode `getInstance` statique et renvoie la m
 
 ## Exemple de Code Singleton en Java
 
-Dans cet exemple, la classe de la connexion à la base de données est le Singleton. Cette classe n'a pas de constructeur public, vous ne pouvez y accéder que grâce à la méthode `getInstance`. Cette méthode met en cache le premier objet créé puis retourne ce même objet lors des appels ultérieurs.
+Dans cet exemple, la classe ```GameManager``` est le Singleton. Cette classe n'a pas de constructeur public, vous ne pouvez y accéder que grâce à la méthode `getInstance`. On peut remarquer que la classe ```Player``` peut acceder a la classe GameManager et a ses variables/methodes static sans créer de nouvelle instance, il suffit d'utiliser la methode ```getInstance```. L'etat de GameManager est donc conserver entre chaque acccès par les autres classes, il y a une unique classe ```GameManager```
 
 ```java
-// La classe baseDeDonnées définit la méthode `getInstance` qui
-// permet aux clients d’accéder à la même instance de la
-// connexion à la base de données dans tout le programme.
-class Database is
-    // L’attribut qui stocke l’instance du singleton doit être
-    // ‘static’.
-    private static field instance: Database
+// On a ici la class GameManger qui permet le controller l'etat d'un jeu
+public class GameManager {
 
-    // Le constructeur du singleton doit toujours être privé
-    // afin d’empêcher les appels à l’opérateur `new`.
-    private constructor Database() is
-        // Code d’initialisation (la connexion au serveur de la
-        // base de données par exemple).
-        // ...
+    // La variable instance du singleton est déclarer ici en static 
+    private static GameManager instance;
+    private static GameState gameState = GameState.MENU;
 
-    // La méthode statique qui contrôle l’accès à l’instance du
-    // singleton.
-    public static method getInstance() is
-        if (Database.instance == null) then
-            acquireThreadLock() and then
-                // Ce thread attend la levée du verrou (lock) le
-                // temps de s’assurer que l’instance n’a pas
-                // déjà été initialisée dans un autre thread.
-                if (Database.instance == null) then
-                    Database.instance = new Database()
-        return Database.instance
+    // Ce getter permet d'acceder a l'instance de la classe ou de crer l'instance si elle n'existe pas
+    public static GameManager getInstance() {
+        if (instance == null) { // L'instance n'existe pas (est null)
+            instance = new GameManager(); // Declaration de la variable instance
+        }
+        return instance; // On renvoie l'instance de la classe 
+    }
 
-    // Pour finir, tout singleton doit définir de la logique
-    // métier qui peut être exécutée dans sa propre instance.
-    public method query(sql) is
-        // Par exemple, toutes les requêtes sur la base de
-        // données d’une application passent par cette méthode.
-        // Par conséquent, vous pouvez définir le code des
-        // limitations ou de la mise en cache ici.
-        // ...
+    // Getter qui nous permet de connaitre l'avancement du jeu
+    public static GameState getGameState() {
+        return gameState;
+    }
+}
 
-class Application is
-    method main() is
-        Database foo = Database.getInstance()
-        foo.query("SELECT ...")
-        // ...
-        Database bar = Database.getInstance()
-        bar.query("SELECT ...")
-        // La variable `bar` contiendra le même objet que la
-        // variable `foo`.
+public class Player {
+    
+    public void takeDamage(int damage) {
+        GameManager gameManager = GameManager.getInstance(); // On recupere l'instance de la classe GameManager
+        GameState gameState = gameManager.getGameState();
+        
+        if(gameState == GameState.PLAYING) {
+            // Take damage
+        }else{
+            return;
+        }
+    }
+}
+
+
+
 ```
 ## Utilisation de Singleton
 
