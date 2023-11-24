@@ -30,26 +30,48 @@ La classe Singleton déclare une méthode `getInstance` statique et renvoie la m
 Dans cet exemple, la classe de la connexion à la base de données est le Singleton. Cette classe n'a pas de constructeur public, vous ne pouvez y accéder que grâce à la méthode `getInstance`. Cette méthode met en cache le premier objet créé puis retourne ce même objet lors des appels ultérieurs.
 
 ```java
-public class DatabaseConnection {
-    private static DatabaseConnection instance;
+// La classe baseDeDonnées définit la méthode `getInstance` qui
+// permet aux clients d’accéder à la même instance de la
+// connexion à la base de données dans tout le programme.
+class Database is
+    // L’attribut qui stocke l’instance du singleton doit être
+    // ‘static’.
+    private static field instance: Database
 
-    // Constructeur privé pour empêcher l'instanciation directe depuis l'extérieur
-    private DatabaseConnection() {
-        // Initialisation de la connexion à la base de données
-    }
+    // Le constructeur du singleton doit toujours être privé
+    // afin d’empêcher les appels à l’opérateur `new`.
+    private constructor Database() is
+        // Code d’initialisation (la connexion au serveur de la
+        // base de données par exemple).
+        // ...
 
-    // Méthode statique de création d'instance
-    public static DatabaseConnection getInstance() {
-        if (instance == null) {
-            instance = new DatabaseConnection();
-        }
-        return instance;
-    }
+    // La méthode statique qui contrôle l’accès à l’instance du
+    // singleton.
+    public static method getInstance() is
+        if (Database.instance == null) then
+            acquireThreadLock() and then
+                // Ce thread attend la levée du verrou (lock) le
+                // temps de s’assurer que l’instance n’a pas
+                // déjà été initialisée dans un autre thread.
+                if (Database.instance == null) then
+                    Database.instance = new Database()
+        return Database.instance
 
-    // Autres méthodes de gestion de la connexion à la base de données
-    // ...
+    // Pour finir, tout singleton doit définir de la logique
+    // métier qui peut être exécutée dans sa propre instance.
+    public method query(sql) is
+        // Par exemple, toutes les requêtes sur la base de
+        // données d’une application passent par cette méthode.
+        // Par conséquent, vous pouvez définir le code des
+        // limitations ou de la mise en cache ici.
+        // ...
 
-    public void executeQuery(String query) {
-        // Implémentation de l'exécution de la requête
-    }
-}
+class Application is
+    method main() is
+        Database foo = Database.getInstance()
+        foo.query("SELECT ...")
+        // ...
+        Database bar = Database.getInstance()
+        bar.query("SELECT ...")
+        // La variable `bar` contiendra le même objet que la
+        // variable `foo`.
