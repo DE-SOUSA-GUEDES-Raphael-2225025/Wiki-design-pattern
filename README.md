@@ -75,3 +75,31 @@ class Application is
         bar.query("SELECT ...")
         // La variable `bar` contiendra le même objet que la
         // variable `foo`.
+
+## Utilisation de Singleton
+
+### Gestion des configurations
+Utiliser un Singleton pour stocker et fournir l'accès aux configurations de l'application, garantissant ainsi qu'il n'y a qu'une seule source de configurations.
+
+### Connexion à une base de données
+Pour éviter la création de plusieurs connexions à une base de données, un Singleton peut être utilisé pour gérer l'instance de connexion, assurant ainsi une utilisation efficace des ressources.
+
+### Gestion des connexions réseau
+Pour des applications qui nécessitent une seule instance pour gérer les connexions réseau, le Singleton offre une solution en évitant la surutilisation des ressources réseau.
+
+## Avantages et Inconvénients du Singleton
+
+### Avantages du Singleton
+
+1. **Contrôle de l'instance unique :** Assure qu'une classe n'a qu'une seule instance, fournissant ainsi un point d'accès global à cette instance.
+2. **Accès global :** Facilite l'accès à l'instance unique depuis n'importe quel point de l'application, ce qui peut être pratique pour des ressources partagées.
+3. **Initialisation tardive (Lazy Loading) :** Permet l'initialisation de l'instance unique uniquement lorsque cela est nécessaire, ce qui peut améliorer les performances lors du démarrage de l'application.
+
+### Inconvénients du Singleton
+
+1. **Ne respecte pas le principe de responsabilité unique :** Ce patron résout deux problèmes à la fois.
+2. **Testabilité :** La présence d'un Singleton peut rendre le code moins testable, car il peut être difficile de remplacer l'instance unique par une version mock ou de test.
+3. **Violation du principe d'ouverture/fermeture :** Peut rendre difficile l'extension de certaines classes, car l'accès à l'instance unique est souvent codé en dur dans le code existant.
+4. **Problèmes de multithreading :** Dans des environnements multithreadés, des problèmes de concurrence peuvent survenir si des précautions appropriées ne sont pas prises lors de l'accès et de la création de l'instance unique.
+
+
