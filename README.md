@@ -145,6 +145,66 @@ Dans cette analogie, la Façade (le serveur) simplifie votre interaction avec un
   
 ## Exemple de Code Facade
 
+Dans cet exemple la classe ```ClientAchatFacade``` utlise le design patter **façade**. Cette classe permet de simplifier l'achat d'un produit en une methode qui appelle tous les sous composants necessaire a l'achat. L'utilisation de la façade permet aussi de ne pas dupliquer de code si on a besoin d'effectuer un paiment depuis des classes différentes. La façade permet également qu'un utilisateur puisse avoir avoir aux sous composants utilisés pour l'achat.
+
+```java
+
+public class ClientAchatFacade {
+    
+    public void achatProduit(String idClient, String idProduit){
+        Client client = Database.getInstance().getClient(idClient);
+        Produit produit = Database.getInstance().getProduit(idProduit);
+        
+        if(client.getSolde() >= produit.getPrix()){
+            client.setSolde(client.getSolde() - produit.getPrix());
+            System.out.println("Achat effectué");
+        }else{
+            System.out.println("Solde insuffisant");
+        }
+    }
+}
+
+public class Client {
+
+    private double solde;
+
+    public Client(){
+        this.solde = 0;
+    }
+
+    public double getSolde() {
+        return solde;
+    }
+
+    public void setSolde(double solde) {
+        this.solde = solde;
+    }
+}
+
+
+public class Produit {
+
+    private double prix;
+
+    public Produit(){
+        this.prix = 0;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+}
+
+
+public class Main {
+
+    public static void main(String[] args) {
+        ClientAchatFacade clientAchatFacade = new ClientAchatFacade();
+        clientAchatFacade.achatProduit("32D10", "52");
+    }
+}
+```
+
 ## Utilisation de Facade
 
 La **façade** est une conception permettant de simplifier l'interaction avec un sous-système complexe en offrant une interface plus conviviale pour le code client. Elle agit comme un intermédiaire en redirigeant les appels du code client vers les objets du sous-système. Voici comment créer et mettre en œuvre une façade :
