@@ -4,7 +4,7 @@ Wiki des designs patterns
 # Singleton #
 
 ## Intention
-L'intention principale du Singleton est de garantir qu'il n'existe qu'une seule instance d'une classe particulière, et de fournir un moyen d'accéder à cette instance à partir de n'importe quel point du programme. Cela peut être utile dans des situations où une seule instance de la classe est suffisante pour coordonner les actions à travers le système, comme la gestion des ressources partagées ou la configuration globale. Le pattern Singleton garantit que la classe n'est instanciée qu'une seule fois en fournissant une méthode qui crée l'instance si elle n'existe pas, sinon, renvoie simplement l'instance existante. De plus, il restreint l'accès aux méthodes de création d'instance, assurant ainsi que la seule instance existante est accessible de manière contrôlée.
+L'intention principale du Singleton est de garantir qu'il n'existe qu'une seule instance d'une classe particulière, et de fournir un moyen d'accéder à cette instance à partir de n'importe quel point du programme. Cela peut être utile dans des situations où une seule instance de la classe est suffisante pour coordonner les actions à travers le système, comme la gestion des ressources partagées ou la configuration globale. Le pattern Singleton garantit que la classe n'est instanciée qu'une seule fois en fournissant une méthode qui crée l'instance si elle n'existe pas, sinon, renvoie simplement l'instance existante. De plus, il restreint l'accès aux méthodes de création d'instance, assurant ainsi que la seule instance existante est accessible de manière contrôlée. Le Singleon fait egalement partit des design pattern de création. 
 
 ## Résolution de problème
 - **Garantir une seule instance :** Son fonctionnement est le suivant : vous créez un objet, mais après un certain temps, vous décidez d’en créer un autre. Plutôt que de vous retrouver avec un objet flambant neuf, vous récupérez celui qui existe déjà. Il est impossible d’implémenter ce comportement avec un constructeur normal, puisqu’un constructeur doit théoriquement toujours retourner un nouvel objet.
@@ -98,7 +98,8 @@ Pour des applications qui nécessitent une seule instance pour gérer les connex
 
 ## Intention
 
-La Façade agit comme une façade (d'où le nom) qui expose une interface simplifiée aux clients tout en gérant les interactions complexes avec les composants du sous-système. Cela facilite l'interaction des clients avec le système, car ils n'ont plus besoin de connaître les détails internes et les subtilités du sous-système.
+La Façade agit comme une façade (d'où le nom) qui expose une interface simplifiée aux clients tout en gérant les interactions complexes avec les composants du sous-système. Cela facilite l'interaction des clients avec le système, car ils n'ont plus besoin de connaître les détails internes et les subtilités du sous-système. La Façade fait partit des design pattern de structure. 
+
 
 ## Résolution de Problèmes
 
