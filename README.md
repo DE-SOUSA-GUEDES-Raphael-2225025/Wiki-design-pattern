@@ -3,11 +3,11 @@ Wiki des designs patterns
 
 # Singleton #
 
-## Intention
-L'intention principale du Singleton est de garantir qu'il n'existe qu'une seule instance d'une classe particulière, et de fournir un moyen d'accéder à cette instance à partir de n'importe quel point du programme. Cela peut être utile dans des situations où une seule instance de la classe est suffisante pour coordonner les actions à travers le système, comme la gestion des ressources partagées ou la configuration globale. Le pattern Singleton garantit que la classe n'est instanciée qu'une seule fois en fournissant une méthode qui crée l'instance si elle n'existe pas, sinon, renvoie simplement l'instance existante. De plus, il restreint l'accès aux méthodes de création d'instance, assurant ainsi que la seule instance existante est accessible de manière contrôlée. Le Singleon fait egalement partit des design pattern de création. 
+## Objectif
+L'objectif principal du Singleton est de garantir qu'il n'existe qu'une seule instance d'une classe particulière, et de donner un moyen d'accéder à cette instance à partir de n'importe quel classe dans l'application. Cela peut être utile dans des situations où une seule instance de la classe est suffisante pour coordonner les actions à travers le système, comme la gestion des ressources partagées (base de données) ou la configuration. Le pattern Singleton garantit que la classe n'est instanciée qu'une seule fois en fournissant une méthode qui crée l'instance si elle n'existe pas ```getInstance()```, sinon, renvoie simplement l'instance existante. De plus, il restreint l'accès aux méthodes de création d'instance, assurant ainsi que la seule instance existante est accessible de manière contrôlée. Le Singleon fait egalement partit des design pattern de création. 
 
 ## Résolution de problème
-- **Garantir une seule instance :** Son fonctionnement est le suivant : vous créez un objet, mais après un certain temps, vous décidez d’en créer un autre. Plutôt que de vous retrouver avec un objet flambant neuf, vous récupérez celui qui existe déjà. Il est impossible d’implémenter ce comportement avec un constructeur normal, puisqu’un constructeur doit théoriquement toujours retourner un nouvel objet.
+- **Garantir une seule instance :** Son fonctionnement est le suivant : vous créez un objet, mais après un certain temps, vous décidez d’en créer un autre. Plutôt que d'instancier un nouvel objet, vous récupérez celui qui existe déjà. Il est impossible d’implémenter ce comportement avec un constructeur normal, puisqu’un constructeur doit théoriquement toujours retourner un nouvel objet. Lorsque l'on veut accéder a cette classe on n'utilise par conséquent pas le mot ```new```
 
 - **Accès global :** Le Singleton fournit un point d'accès global à cette unique instance. Cela simplifie l'accès à cette instance depuis n'importe quelle partie du code, évitant ainsi la nécessité de passer explicitement l'instance entre différentes parties du programme. Cependant, il protège son instance et l’empêche d’être modifiée.
 
@@ -15,14 +15,14 @@ L'intention principale du Singleton est de garantir qu'il n'existe qu'une seule 
 
 ## Solution
 1. Limiter l'accès à l'opérateur `new` en déclarant le constructeur par défaut en tant que privé, empêchant ainsi d'autres objets d'invoquer directement la création d'instances de la classe Singleton.
-2. Introduire une méthode statique de création agissant comme un constructeur, qui en interne utilise le constructeur privé pour instancier un objet et le stocke dans une variable statique. Tous les appels ultérieurs à cette méthode renvoient l'objet mis en mémoire cache. Une variable static ```Instance``` est donc initialisée et permet d'accéder à la classe avec un getter ```getInstance()```.
+2. Introduire une méthode statique de création agissant comme un constructeur, qui en interne utilise le constructeur privé pour instancier un objet et le stocke dans une variable statique. Tous les appels ultérieurs à cette méthode renvoient cette variable static. Une variable static ```Instance``` est donc initialisée et permet d'accéder à la classe avec un getter ```getInstance()```.
 3. Si votre code a accès à la classe d'un singleton, vous pouvez appeler ses méthodes statiques. Le même objet est toujours renvoyé à chaque appel de cette méthode.
 
 ## Analogie
 Imaginons un roi dans un royaume qui veut garantir qu'il n'y ait qu'un seul trésor national. Le roi crée une clé spéciale qu'il garde toujours avec lui. Quand quelqu'un a besoin d'accéder au trésor, il doit demander la clé au roi. Si la clé n'existe pas encore, le roi la crée ; sinon, il la partage. Ainsi, il n'y a qu'une seule clé (instance) pour accéder au trésor (objet), assurant ainsi l'unicité et le contrôle d'accès, tout comme le design pattern Singleton.
 
 ## Structure
-La classe Singleton déclare une méthode `getInstance` statique et renvoie la même instance de sa propre classe. Le code client ne peut pas référencer les constructeurs singleton. Seule la méthode `getInstance` doit autoriser l'accès aux objets Singleton.
+La classe Singleton déclare une méthode `getInstance` statique et renvoie la même instance de sa propre classe. Seule la méthode `getInstance` doit autoriser l'accès aux objets Singleton.
 ![Image montrant la structure de singleton](https://refactoring.guru/images/patterns/diagrams/singleton/structure-fr.png?id=c61f45af3dee82ffdbe7a737fa33efa3)
 
 ## Exemple de Code Singleton en Java
@@ -74,7 +74,7 @@ public class Player {
 Utiliser un Singleton pour stocker et fournir l'accès aux configurations de l'application, garantissant ainsi qu'il n'y a qu'une seule source de configurations.
 
 ### Connexion à une base de données
-Pour éviter la création de plusieurs connexions à une base de données, un Singleton peut être utilisé pour gérer l'instance de connexion, assurant ainsi une utilisation efficace des ressources.
+Pour éviter la création de plusieurs connexions à une base de données, un Singleton peut être utilisé pour gérer l'instance de connexion, assurant ainsi une utilisation efficace des ressources. Les classes de base de données utilisent fréquement des Singleton.
 
 ### Gestion des connexions réseau
 Pour des applications qui nécessitent une seule instance pour gérer les connexions réseau, le Singleton offre une solution en évitant la surutilisation des ressources réseau.
@@ -98,7 +98,7 @@ Pour des applications qui nécessitent une seule instance pour gérer les connex
 
 ## Intention
 
-La Façade agit comme une façade (d'où le nom) qui expose une interface simplifiée aux clients tout en gérant les interactions complexes avec les composants du sous-système. Cela facilite l'interaction des clients avec le système, car ils n'ont plus besoin de connaître les détails internes et les subtilités du sous-système. La Façade fait partit des design pattern de structure. 
+La Façade agit comme une façade (d'où le nom) qui expose une interface simplifiée aux clients tout en gérant les interactions complexes avec les composants du sous-système. Cela facilite l'interaction des clients avec le système, car ils n'ont plus besoin de connaître les détails internes du sous-système. La Façade fait partit des design pattern de structure. 
 
 
 ## Résolution de Problèmes
@@ -107,14 +107,14 @@ La Façade agit comme une façade (d'où le nom) qui expose une interface simpli
 Lorsque votre système est composé de nombreux sous-systèmes interdépendants et que l'interaction directe avec ces sous-systèmes est complexe, la Façade offre une interface simplifiée pour l'utilisation du système global.
 
 ### Dépendances Client
-Si les clients sont fortement couplés avec les détails d'implémentation du système, tout changement interne peut avoir un impact important sur les clients. La Façade réduit cette dépendance en fournissant une interface stable.
+Si les clients sont fortement couplés avec les détails d'implémentation du système, tout changement interne peut avoir un impact important sur les clients. La Façade réduit cette dépendance en fournissant une interface stable et modifiable facilement.
 
 ### Séparation des Responsabilités
 La Façade permet de déplacer la complexité de la gestion des interactions entre les composants du sous-système à l'intérieur de la façade, aidant ainsi à maintenir une structure de code plus claire et à séparer les responsabilités.
 
 ## Solution
 
-Une façade se révèle très pratique si votre application n’a besoin que d’une partie des fonctionnalités d’une librairie sophistiquée parmi les nombreuses qu’elle propose. Par exemple, une application qui envoie des petites vidéos de chats comiques sur des réseaux sociaux peut potentiellement utiliser une librairie de conversion vidéo professionnelle. Mais la seule chose dont vous ayez réellement besoin, c’est d’une classe dotée d’une méthode `encoder(fichier, format)`. Après avoir créé cette classe et intégré la librairie de conversion vidéo, votre façade est opérationnelle.
+Une façade se révèle très pratique si l'application n’a besoin que d’une partie des fonctionnalités d’une librairie sophistiquée parmi les nombreuses qu’elle propose. Par exemple, une application qui envoie des petites vidéos de chats comiques sur des réseaux sociaux peut potentiellement utiliser une librairie de conversion vidéo professionnelle. Mais la seule chose dont vous ayez réellement besoin, c’est d’une classe dotée d’une méthode `encoder(fichier, format)`. Après avoir créé cette classe et intégré la librairie de conversion vidéo, votre façade est opérationnelle.
 
 ## Analogie
 
@@ -135,10 +135,9 @@ Dans cette analogie, la Façade (le serveur) simplifie votre interaction avec un
    - Façade offre un accès pratique aux différentes parties des fonctionnalités du sous-système. Elle sait où orienter les besoins de ses clients et comment utiliser les différentes pièces mobiles.
 
 2. **Classe Façade Supplémentaire :**
-   - Une classe Façade supplémentaire peut être créée afin de prévenir toute complexité excessive dans une façade existante. Cette nouvelle façade additionnelle peut inclure des fonctionnalités supplémentaires sans surcharger la première, et elle peut être utilisée à la fois par le client directement et par d'autres façades.
+   - Une classe Façade supplémentaire peut être créée afin de prévenir toute complexité excessive dans une façade existante. Cette nouvelle façade additionnelle peut inclure des fonctionnalités supplémentaires sans surcharger la première, et elle peut être utilisée à la fois par le client directement et par d'autres façades. Cela evite d'avoir une façade trop complexe et garde par conséquent un code clair.
 
 3. **Sous-système Complexe :**
-   - Le sous-système complexe est constitué d'une multitude d'objets divers. Afin de leur conférer une véritable utilité, il est nécessaire de se plonger dans les détails de l'implémentation du sous-système, tels que l'initialisation des objets dans un ordre précis et la fourniture des données dans un format approprié.
    - Les classes du sous-système ne sont pas conscientes de l'existence de la façade. Elles fonctionnent et interagissent directement à l'intérieur de leur propre système.
 
 4. **Utilisation de la Façade par le Client :**
