@@ -27,7 +27,7 @@ La classe Singleton déclare une méthode `getInstance` statique et renvoie la m
 
 ## Exemple de Code Singleton en Java
 
-Dans cet exemple, la classe ```GameManager``` est le Singleton. Cette classe n'a pas de constructeur public, vous ne pouvez y accéder que grâce à la méthode `getInstance`. On peut remarquer que la classe ```Player``` peut acceder a la classe GameManager et a ses variables/methodes static sans créer de nouvelle instance, il suffit d'utiliser la methode ```getInstance```. L'etat de GameManager est donc conserver entre chaque acccès par les autres classes, il y a une unique classe ```GameManager```
+Dans cet exemple, la classe ```GameManager``` est le Singleton. Cette classe n'a pas de constructeur public, vous ne pouvez y accéder que grâce à la méthode `getInstance`. On peut remarquer que la classe ```Player``` peut acceder a la classe GameManager et a ses variables/methodes static sans créer de nouvelle instance, il suffit d'utiliser la methode ```getInstance```. L'etat de GameManager est donc conserver entre chaque accès par les autres classes, il y a une unique classe ```GameManager```
 
 ```java
 // On a ici la class GameManger qui permet le controller l'etat d'un jeu
