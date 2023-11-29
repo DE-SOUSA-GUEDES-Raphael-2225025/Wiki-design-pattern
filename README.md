@@ -135,7 +135,7 @@ Dans cette analogie, la Façade (le serveur) simplifie votre interaction avec un
    - Façade offre un accès pratique aux différentes parties des fonctionnalités du sous-système. Elle sait où orienter les besoins de ses clients et comment utiliser les différentes pièces mobiles.
 
 2. **Classe Façade Supplémentaire :**
-   - Une classe Façade supplémentaire peut être créée afin de prévenir toute complexité excessive dans une façade existante. Cette nouvelle façade additionnelle peut inclure des fonctionnalités supplémentaires sans surcharger la première, et elle peut être utilisée à la fois par le client directement et par d'autres façades. Cela evite d'avoir une façade trop complexe et garde par conséquent un code clair.
+   - Une classe Façade supplémentaire peut être crée afin de prévenir toute complexité excessive dans une façade existante. Cette nouvelle façade additionnelle peut inclure des fonctionnalités supplémentaires sans surcharger la première, et elle peut être utilisée à la fois par le client directement et par d'autres façades. Cela evite d'avoir une façade trop complexe et garde par conséquent un code clair.
 
 3. **Sous-système Complexe :**
    - Les classes du sous-système ne sont pas conscientes de l'existence de la façade. Elles fonctionnent et interagissent directement à l'intérieur de leur propre système.
